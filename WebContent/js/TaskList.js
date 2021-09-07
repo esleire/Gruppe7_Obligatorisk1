@@ -48,9 +48,13 @@ function updateTask() {
 	return null;
 }
 
-function removeTask() {
+// Denne skal oppdatere view
+
+// Skjønner ikke helt hvordan han mener at vi skal kunne fjerne på index uten å ta inn listen som parameter også?
+function removeTask(taskID) {
 	
-	return null;
+	let taskList;
+	taskList.splice(taskID, 1);
 }
 
 
