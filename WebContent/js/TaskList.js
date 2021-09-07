@@ -13,8 +13,13 @@ class TaskList {
 // Metoder som skal implementeres
 
 // Vet at det er stavet feil her, men siden det er dette navnet Bjarte har brukt så gjør jeg det også
+// Denne skal oppdatere view
 function enableaddtask() {
-		
+	
+	// After button is pushed the task is enabled?
+	// Kan være noe vanskelig her da det er vanskelig å tolke hva som ligger i "enabled"
+	// Denne metoden skal enable "New task" knappen
+	
 	return null;	
 }
 
