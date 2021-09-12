@@ -58,7 +58,7 @@ function updateTask() {
 // Skjønner ikke helt hvordan han mener at vi skal kunne fjerne på index uten å ta inn listen som parameter også?
 function removeTask(taskID) {
 	
-	let taskList;
+	const taskList;
 	taskList.splice(taskID, 1);
 }
 
