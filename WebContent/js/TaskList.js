@@ -10,8 +10,6 @@ class TaskList {
 	
 }
 
-const taskList;
-
 // Metoder som skal implementeres
 
 // Vet at det er stavet feil her, men siden det er dette navnet Bjarte har brukt så gjør jeg det også
@@ -60,7 +58,9 @@ function updateTask() {
 // Skjønner ikke helt hvordan han mener at vi skal kunne fjerne på index uten å ta inn listen som parameter også?
 function removeTask(taskID) {
 	
-	taskList.splice(taskID, 1);
+	const taskList = this.shadow.querySelector("task-list");
+	
+	taskList.remove(taskID);
 }
 
 
