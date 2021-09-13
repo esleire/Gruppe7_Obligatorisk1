@@ -40,7 +40,12 @@ function deletetaskCallback() {
 
 function noTask() {
 	
-	return null;
+	const taskList = this.shadow.querySelector("task-list"); 
+	
+	if(taskList.length === 0){
+		return "No tasks found"; 
+	}
+	
 }
 
 function showTask() {
