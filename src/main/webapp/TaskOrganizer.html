@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html>
 
-<head>
-	<meta charset="UTF-8">
-	<title>Task Organizer</title>
-	<script src="./js/modules.js" type='module'></script>
+<html lang="en">
+    <head>
+        <link rel="icon" href="data:," />
+        <script defer src="js/appController.js" type="module"></script>
+        
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <meta name="Author" content="Bjarte Kileng" />
+        <link href="tasklist.css" rel="stylesheet" />
 
-</head>
+        <title>Task Organizer</title>
+    </head>
 
-<body>
+    <body>
+    <!--    <script defer src="js/config.js"></script> -->
+        <h1>Tasks</h1>
 
-	<task-list></task-list>
-
-</body>
-
+        <!-- The task list -->
+        <task-list></task-list>
+            
+        <!-- The Modal -->
+        <task-box class="aaa"></task-box>
+    </body>
 </html>
