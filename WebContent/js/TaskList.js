@@ -50,9 +50,11 @@ function showTask() {
 	return null;
 }
 
-function updateTask() {
+function updateTask(status) {
 	
-	return null;
+	const taskList = this.shadow.querySelector("task-list");
+	
+	taskList.status.id(status);
 }
 
 // Denne skal oppdatere view
