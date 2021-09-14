@@ -1,6 +1,5 @@
 export default class extends HTMLElement {
 	constructor() {
-		// Ikke nødvendigvis at vi trenger noe her
 		this.content = this.content.bind(this);
 		const shadow = this.attachShadow({ mode: 'closed' });
 		shadow.appendChild(this.content);

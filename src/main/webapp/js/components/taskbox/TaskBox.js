@@ -6,7 +6,7 @@
 export default class extends HTMLElement {
 
     // Private fields
-    #cssfile = "main.css";
+    #cssfile = "taskbox.css";
     #shadow;
     #taskbox;
     #newtaskCallbacks = new Map();
