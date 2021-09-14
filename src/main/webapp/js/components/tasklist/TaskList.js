@@ -55,7 +55,7 @@ export default class extends HTMLElement {
         return prevId;
 	}
 	
-	deletetaskCallback() {
+	deletetaskCallback(callback) {
 	
 		this.#deletetaskCallbacks.set(this.#deleteCallbackId, callback);
         const prevId = this.#deleteCallbackId;
