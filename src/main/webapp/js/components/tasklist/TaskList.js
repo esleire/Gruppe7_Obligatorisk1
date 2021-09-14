@@ -1,5 +1,8 @@
+// Implementering taskbox
+
 export default class extends HTMLElement {
-	// Private fields
+	
+	// Private
     #cssfile = "tasklist.css";
     #shadow;
     #newtaskCallbacks = new Map();
