@@ -23,3 +23,8 @@ tr:first-child > th, tr:first-child > td {
 select, button {
     margin: 5px 0 5px 0;
 }
+
+task-box {
+    margin-top: 20px;
+}
+
