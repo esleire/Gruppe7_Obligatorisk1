@@ -2,17 +2,20 @@
 
 export default class extends HTMLElement {
 
-    // Private
+    // private
     #cssfile = "taskbox.css";
     #shadow;
     #taskbox;
     #newtaskCallbacks = new Map();
     #taskCallbackId = 0;
 
+	// constructor for TaskBox
+
     constructor() {
         super();
 
         this.#shadow = this.attachShadow({ mode: 'closed' });
+
         this.#createLink();
         this.#taskbox = this.#createHTML();
 
@@ -20,21 +23,29 @@ export default class extends HTMLElement {
         this.#shadow.querySelector("button").addEventListener("click", this.#addtask.bind(this));
     }
 
+	// metoder som skal implementeres
+
     show() {
+	
         const inputElm = this.#shadow.querySelector("input");
+
         inputElm.value = "";
+
         this.#shadow.querySelector("select").selectedIndex = 0;
         this.#taskbox.classList.remove("hidden");
 
         const modalwidth = this.#shadow.querySelector("table").getBoundingClientRect().width;
         const closeelmwidth = this.#shadow.querySelector("span").getBoundingClientRect().width;
+
         this.#shadow.querySelector("div>div").style.width = `${modalwidth + closeelmwidth + 40}px`;
 
         inputElm.focus();
     }
 
     set allstatuses(statuslist) {
-        const select = this.#shadow.querySelector("select");
+        
+		const select = this.#shadow.querySelector("select");
+		
         statuslist.forEach((status, i) => {
             const optelement = document.createElement('option')
             optelement.value = i
@@ -44,17 +55,21 @@ export default class extends HTMLElement {
     }
 
     newtaskCallback(callback) {
+	
         this.#newtaskCallbacks.set(this.#taskCallbackId, callback);
         const prevId = this.#taskCallbackId;
         ++this.#taskCallbackId;
+
         return prevId;
     }
 
     close() {
+	
         this.#taskbox.classList.add("hidden");
     }
 
     #createLink() {
+	
         const link = document.createElement('link');
         const path = import.meta.url.match(/.*\//)[0];
         link.href = path.concat(this.#cssfile);
@@ -64,6 +79,7 @@ export default class extends HTMLElement {
     }
 
     #createHTML() {
+	
         const wrapper = document.createElement('div');
         wrapper.classList.add("hidden");
 
@@ -86,6 +102,7 @@ export default class extends HTMLElement {
     }
 
     get #task() {
+	
         let task = {};
         if (!this.#taskbox.classList.contains("hidden")) {
             task.title = this.#shadow.querySelector("input").value;
@@ -95,6 +112,7 @@ export default class extends HTMLElement {
     }
 
     #addtask() {
+	
         this.#newtaskCallbacks.forEach(
             callback => { callback(this.#task) }
         );
