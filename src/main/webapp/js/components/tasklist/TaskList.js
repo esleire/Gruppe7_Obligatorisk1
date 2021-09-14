@@ -1,5 +1,4 @@
 // Implementering taskbox
-
 export default class extends HTMLElement {
 	
 	// Private
@@ -74,6 +73,7 @@ export default class extends HTMLElement {
 	showTask(task) {
 	
 		if (!this.allstatuses) return;
+		
         if (task.title.trim() == "") return;
 
         if (this.#shadow.querySelectorAll('table').length == 0) {
@@ -98,8 +98,10 @@ export default class extends HTMLElement {
             const optElm = document.createElement("option");
             optElm.value = status;
             optElm.text = status;
+
             if (status == task.status) optElm.disabled = true
             selectElm.add(optElm);
+
         });
         selectcell.appendChild(selectElm);
 
@@ -116,14 +118,18 @@ export default class extends HTMLElement {
 	updateTask(task) {
 	
 		const row = this.#listContainer.querySelector(`tr[data-identity="${task.id}"]`);
+		
         if (!row) return;
+
         row.cells[1].textContent = task.status;
         const selectElm = row.cells[2].firstElementChild;
         selectElm.selectedIndex = 0;
         Array.from(selectElm.options).forEach(
             (optElm) => {
+	
                 if (optElm.value == task.status) {
                     optElm.disabled = true;
+
                 } else {
                     optElm.disabled = false;
                 }
@@ -175,7 +181,6 @@ export default class extends HTMLElement {
 
         wrapper.insertAdjacentHTML('beforeend', content);
         this.#shadow.appendChild(wrapper);
-
         return wrapper;
     }
 
@@ -186,6 +191,7 @@ export default class extends HTMLElement {
     }
 
     get #numtasks() {
+	
         if (this.#shadow.querySelectorAll('table').length == 0) return 0;
         if (this.#shadow.querySelector('table').tBodies.length == 0) {
             console.log("TBODY exist, but with no rows. This should not have happened.");
@@ -204,6 +210,7 @@ export default class extends HTMLElement {
     #statusUpdate(event) {
         const elm = event.target;
         const newStatus = elm.value;
+
         if (elm.value == 0) return;
         //const id=this.getTaskIdOfRow(elm.parentNode.parentNode)
         const id = elm.parentNode.parentNode.getAttribute("data-identity");
@@ -216,6 +223,7 @@ export default class extends HTMLElement {
 
     #numtaskMessage() {
         const numtasks = this.#numtasks;
+
         if (this.numtasks == 0) {
             this.#showMessage("No tasks were found.");
         } else if (numtasks == 1) {
@@ -229,6 +237,7 @@ export default class extends HTMLElement {
         const elm = event.target;
         const id = elm.parentNode.parentNode.getAttribute("data-identity");
         const taskTitle = elm.parentNode.parentNode.cells[0].textContent;
+
         if (window.confirm(`Delete task '${taskTitle}'?`)) {
             this.#deletetaskCallbacks.forEach(callback => callback(id));
         }
