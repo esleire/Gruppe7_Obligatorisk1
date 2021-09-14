@@ -101,7 +101,7 @@ const main = {
                     if (id == deletetask.id) {
                         this.tasklist.removeTask(id);
                     } else {
-                        console.log('Something is wrong. Server has deleted the wrong task.');
+                        console.log('Something is wrong');
                     }
                 }
             } catch (error) {
@@ -126,7 +126,7 @@ const main = {
                 if (newtask.responseStatus) {
                     this.tasklist.showTask(newtask.task);
                 } else {
-                    console.log('Could not add task on server');
+                    console.log('Something went wrong, could not add task');
                 }
             } catch (error) {
                 console.log(error);
@@ -139,7 +139,7 @@ const main = {
 
     addTask(task) {
         if (task.title == "") {
-            window.alert("Task must have a title");
+            window.alert("Your task needs a title");
         } else {
             this.taskbox.close();
             this.newTask(task);
