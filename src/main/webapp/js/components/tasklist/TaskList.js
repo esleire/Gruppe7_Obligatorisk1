@@ -1,12 +1,32 @@
 export default class extends HTMLElement {
-	constructor() {
-		this.content = this.content.bind(this);
-		const shadow = this.attachShadow({ mode: 'closed' });
-		shadow.appendChild(this.content);
+	// Private fields
+    #cssfile = "tasklist.css";
+    #shadow;
+    #newtaskCallbacks = new Map();
+    #taskCallbackId = 0;
 
-		const tasklist = document.querySelector("task-list");
-		tasklist._enableaddtask();
-	}
+    #changestatusCallbacks = new Map();
+    #statusCallbackId = 0;
+
+    #deletetaskCallbacks = new Map();
+    #deleteCallbackId = 0;
+
+    #listContainer;
+    #messageContainer;
+
+    constructor() {
+        super();
+
+        this.allstatuses = null
+
+        this.#shadow = this.attachShadow({ mode: 'open' });
+        this.#createLink();
+        this.#createHTML();
+        this.#listContainer = this.#shadow.getElementById("tasklist");
+        this.#messageContainer = this.#shadow.getElementById("message");
+
+        this.#shadow.querySelector("button").addEventListener("click", this.#addtask.bind(this));
+    }
 
 	// Metoder som skal implementeres
 	
