@@ -1,11 +1,8 @@
-/**
-  * TaskBox
-  * Manage view to add a new task
-  */
+// Implementering av taskbox
 
 export default class extends HTMLElement {
 
-    // Private fields
+    // Private
     #cssfile = "taskbox.css";
     #shadow;
     #taskbox;
@@ -23,17 +20,12 @@ export default class extends HTMLElement {
         this.#shadow.querySelector("button").addEventListener("click", this.#addtask.bind(this));
     }
 
-    /**
-     * Opens the modal box of view
-     * @public
-     */
     show() {
         const inputElm = this.#shadow.querySelector("input");
         inputElm.value = "";
         this.#shadow.querySelector("select").selectedIndex = 0;
         this.#taskbox.classList.remove("hidden");
 
-        // Adjust the width of the box to fit its content
         const modalwidth = this.#shadow.querySelector("table").getBoundingClientRect().width;
         const closeelmwidth = this.#shadow.querySelector("span").getBoundingClientRect().width;
         this.#shadow.querySelector("div>div").style.width = `${modalwidth + closeelmwidth + 40}px`;
@@ -41,11 +33,6 @@ export default class extends HTMLElement {
         inputElm.focus();
     }
 
-    /**
-     * Set the list of possible task states
-     * @public
-     * @param{Array<Object>} statuslist
-     */
     set allstatuses(statuslist) {
         const select = this.#shadow.querySelector("select");
         statuslist.forEach((status, i) => {
@@ -56,11 +43,6 @@ export default class extends HTMLElement {
         })
     }
 
-    /**
-     * Add callback to run at click on the "Add task" button
-     * @public
-     * @param {function} callback
-     */
     newtaskCallback(callback) {
         this.#newtaskCallbacks.set(this.#taskCallbackId, callback);
         const prevId = this.#taskCallbackId;
@@ -68,18 +50,10 @@ export default class extends HTMLElement {
         return prevId;
     }
 
-    /**
-     * Closes the modal box
-     * @public
-     */
     close() {
         this.#taskbox.classList.add("hidden");
     }
 
-    /**
-     * Create LINK tag for the CSS file and append to the shadow DOM
-     * @privat
-     */
     #createLink() {
         const link = document.createElement('link');
         const path = import.meta.url.match(/.*\//)[0];
@@ -89,10 +63,6 @@ export default class extends HTMLElement {
         this.#shadow.appendChild(link);
     }
 
-    /**
-     * Create the HTML skeleton of component and append to the shadow DOM
-     * @privat
-     */
     #createHTML() {
         const wrapper = document.createElement('div');
         wrapper.classList.add("hidden");
@@ -115,11 +85,6 @@ export default class extends HTMLElement {
         return wrapper;
     }
 
-    /**
-     * Create and return a task from the FORM elements of the modal box
-     * @private
-     * @return {Object}
-     */
     get #task() {
         let task = {};
         if (!this.#taskbox.classList.contains("hidden")) {
@@ -129,10 +94,6 @@ export default class extends HTMLElement {
         return task;
     }
 
-    /**
-     * Event listener to run at click on the "Add task" button
-     * @privat
-     */
     #addtask() {
         this.#newtaskCallbacks.forEach(
             callback => { callback(this.#task) }
